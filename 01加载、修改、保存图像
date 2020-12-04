@@ -1,0 +1,27 @@
+#include <iostream>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc/types_c.h>
+
+using namespace cv;
+
+int main(int agrc, char** argv)
+{
+	Mat src, out;
+	src = imread("D:/Files/Code/VS/FigureApp/Pictures/Dehazing_Picture.bmp", IMREAD_ANYCOLOR);
+	if (src.empty())
+	{
+		printf("Load image failed");
+		return -1;
+	}
+	namedWindow("Input image", WINDOW_NORMAL);
+	imshow("Input image", src);
+
+	cvtColor(src, out, COLOR_BGR2HLS);
+	namedWindow("Output image", WINDOW_NORMAL);
+	imshow("Output image", out);
+
+	imwrite("D:/Files/Code/VS/FigureApp/Pictures/out.jpg", out);
+
+	waitKey(0);
+	return 0;
+}
